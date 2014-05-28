@@ -1,0 +1,24 @@
+- name: 4.2.1 Disable Sourced Routed Packet Acceptance (all)
+  sysctl: name=net.ipv4.conf.all.accept_source_route value=0 state=present
+- name: 4.2.1 Disable Sourced Routed Packet Acceptance (default)
+  sysctl: name=net.ipv4.conf.default.accept_source_route value=0 state=present
+- name: 4.2.2 Disable ICMP Redircet Acceptance (all)
+  sysctl: name=net.ipv4.conf.all.accept_redirects value=0 state=present
+- name: 4.2.2 Disable ICMP Redircet Acceptance (default)
+  sysctl: name=net.ipv4.conf.default.accept_redirects value=0 state=present
+- name: 4.2.3 Disable Secure ICMP Redircet Acceptance (all)
+  sysctl: name=net.ipv4.conf.all.secure_redirects value=0 state=present
+- name: 4.2.3 Disable Secure ICMP Redircet Acceptance (default)
+  sysctl: name=net.ipv4.conf.default.secure_redirects value=0 state=present
+- name: 4.2.4 Log Suspicious Packets (all)
+  sysctl: name=net.ipv4.conf.all.log_martians value=1 state=present
+- name: 4.2.4 Log Suspicious Packets (default)
+  sysctl: name=net.ipv4.conf.default.log_martians value=1 state=present
+- name: 4.2.5 Enable Ignore Broadcats Requests
+  sysctl: name=net.ipv4.icmp_echo_ignore_broadcasts value=1 state=present
+- name: 4.2.6 Enable Bad Error Message Protection
+  sysctl: name=net.ipv4.icmp_ignore_bogus_error_responses value=1 state=present
+- name: 4.2.7 Enable RFC-recommended source route validation
+  sysctl: name=net.ipv4.conf.all.rp_filter value=1 state=present
+- name: 4.2.8 Enable TCP SYN cookies
+  sysctl: name=net.ipv4.tcp_max_syn_backlog value=1 state=present

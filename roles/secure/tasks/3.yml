@@ -1,0 +1,31 @@
+- name: 3.1 Set Daemon umask
+  lineinfile: dest=/etc/sysconfig/init state=present regexp=^umask line="umask 027"
+- name: 3.2 Remove X Windows (runlevel 3)
+  lineinfile: dest=/etc/inittab state=present regexp="^id:" line="id:3:initdefault:"
+- name: 3.2 Remove X Windows (remove package group)
+  yum: name="@X Window System" state=absent
+  ignore_errors: True
+- name: 3.4 Check if avahi is installed
+  command: rpm -q avahi
+  register: rpm_check
+  ignore_errors: True
+- name: 3.3 Disable Avahi Server
+  service: name=avahi-daemon state=stopped enabled=no
+  when: rpm_check|success
+- name: 3.4 Check if CUPS is installed
+  command: rpm -q cups
+  register: rpm_check
+  ignore_errors: True
+- name: 3.4 Disable Print Server - CUPS (Not Scored)
+  service: name=cups state=stopped enabled=no
+  when: rpm_check|success
+- name: 3.5 Remove DHCP Server
+  yum: name=dhcp state=absent
+- name: 3.6 Configure Network Time Protocol
+  yum: name=ntp state=present
+- name: 3.6 Configure Network Time Protocol (ntp.conf)
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  notify: 
+  - restart ntp
+- name: 3.16 Configure Mail Transfer Agent for Local-Only Mode
+  lineinfile: dest=/etc/postfix/main.cf state=present regexp="^inet_interfaces" line="inet_interfaces = localhost" insertafter=EOF

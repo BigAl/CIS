@@ -1,0 +1,10 @@
+- name: 1.4.2 Set the SELinux State
+  yum: name=selinux-policy-targeted state=present
+  yum: name=libselinux-python state=present
+#- name: 1.4.3 Set the SELinux Policy
+#  selinux: state=enforcing policy=targeted
+- name: 1.4.4 Remove SETroubleshoot
+  yum: name=setroubleshoot state=absent
+- name: 1.4.5 Remove MCS Translation Service
+  yum: name=mcstrans state=absent
+#- name: 1.4.6 Check for unconfirmed Daemons

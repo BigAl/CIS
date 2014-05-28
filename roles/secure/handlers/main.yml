@@ -1,0 +1,4 @@
+- name: update authconfig
+  shell: /usr/sbin/authconfig --passalgo=sha512 --update
+- name: restart ntp
+  service: name=ntpd state=restarted

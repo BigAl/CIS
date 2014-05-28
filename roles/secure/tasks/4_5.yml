@@ -1,0 +1,4 @@
+- name: 4.5.3 Verify Permissions on /etc/hosts.allow
+  file: path=/etc/hosts.allow owner=root group=root mode=0644
+- name: 4.5.5 Verify Permissions on /etc/hosts.deny
+  file: path=/etc/hosts.deny owner=root group=root mode=0644

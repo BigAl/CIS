@@ -1,0 +1,5 @@
+- name: 4.7 Enable IPtables (install)
+  yum: name=iptables state=present
+- name: 4.7 Enable IPtables (running)
+  service: name=iptables enabled=yes
+# Note state=started or reloaded fails as there are no rules

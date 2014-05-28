@@ -1,0 +1,14 @@
+- name: 5.2.1.3 Keep All Auditing Information
+  yum: name=audit state=present
+- name: 5.2.1.3 Keep All Auditing Information
+  lineinfile: dest=/etc/audit/auditd.conf state=present regexp="^max_log_file_action" line="max_log_file_action = keep_logs" insertafter=EOF
+- name: 5.2.2 Enable audited service
+  service: name=auditd state=started
+- name: 5.2.3 Enable Auditing for Processes That Start Prior to auditd
+  lineinfile: dest=/boot/grub/grub.conf state=present regexp='(^\s+kernel(\s+(?!audit=1)[\w=/\-\.]+)*)\s*$' line='\1 audit=1' backup=yes backrefs=yes
+- name: 5.2.4 Audit Events 
+  copy : src=audit.rules.64 dest=/etc/audit/audit.rules
+  when: ansible_userspace_bits == "64"
+- name: 5.2.4 Audit Events 
+  copy : src=audit.rules.32 dest=/etc/audit/audit.rules
+  when: ansible_userspace_bits == "32"

@@ -1,0 +1,8 @@
+- name: 8.1 Set Warning Banner for Standard Login Services
+  copy : src=motd dest=/etc/motd owner=root group=root mode=0644
+- name: 8.1 Set Warning Banner for Standard Login Services
+  copy : src=issue dest=/etc/issue owner=root group=root mode=0644
+- name: 8.1 Set Warning Banner for Standard Login Services
+  file: src=motd dest=/etc/issue.net owner=root group=root mode=0644
+- name: 8.2 Remove OS Information from Login Warning Banners
+  shell: echo "Already set in 8.1"

@@ -1,0 +1,20 @@
+ntp_config_server: [0.au.pool.ntp.org, 1.au.pool.ntp.org, 2.au.pool.ntp.org, 3.au.pool.ntp.org]
+ntp_config_restrict:
+- "default kod nomodify notrap nopeer noquery"
+- "-6 default kod nomodify notrap nopeer noquery"
+- "127.0.0.1"
+
+ntp_config_driftfile: "/var/lib/ntp/drift"
+ntp_config_listen: []
+ntp_config_filegen: [] 
+ntp_config_statistics: no
+ntp_config_crypto: no
+ntp_config_includefile: "/etc/ntp/crypto/pw"
+ntp_config_keys: "/etc/ntp/keys"
+ntp_config_trustedkey: no
+ntp_config_requestkey: no
+ntp_config_controlkey: no
+ntp_config_broadcast: no 
+ntp_config_broadcastclient: no
+ntp_config_multicastclient: no
+

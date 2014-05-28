@@ -1,0 +1,8 @@
+- name: 4.4.1.1 Disable IPv6 Router Advertisements (Not Scored) (all)
+  sysctl: name=net.ipv6.conf.all.accept_ra value=0 state=present
+- name: 4.4.1.1 Disable IPv6 Router Advertisements (Not Scored) (default)
+  sysctl: name=net.ipv6.conf.default.accept_ra value=0 state=present
+- name: 4.4.1.2 Disable IPv6 Redirect Acceptance (Not Scored) (all)
+  sysctl: name=net.ipv6.conf.all.accept_redirects value=0 state=present
+- name: 4.4.1.2 Disable IPv6 Redirect Acceptance (Not Scored) (default)
+  sysctl: name=net.ipv6.conf.default.accept_redirects value=0 state=present

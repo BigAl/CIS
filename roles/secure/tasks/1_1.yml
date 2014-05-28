@@ -1,0 +1,36 @@
+# FileSytem Configuration 
+#- mount : name=/tmp src=same fstype=ext4 opts=nodev,nosuid,noexec state=present
+- name: 1.1.1 - 1.1.4 Set nosuid option for /tmp Partition 
+  when: item.mount == "/tmp"
+  mount:
+    name={{ item.mount }}
+    fstype={{ item.fstype }}
+    opts=nodev,nosuid,noexec
+    src={{ item.device }}
+    state=present
+  with_items: ansible_mounts
+#- name: 1.1.5 Create Separate Partition for /var
+- name: 1.1.6 Bind Mount the /var/tmp directory to /tmp
+  mount: name=/var/tmp fstype=none opts=rw,bind src=/tmp state=present
+#- name: 1.1.7 Create Separate Partition for /var/log 
+#- name: 1.1.8 Create Separate Partition for /var/log/audit
+- name: 1.1.10 Add nodev Option to /home 
+  when: item.mount == "/home"
+  mount:
+    name={{ item.mount }}
+    fstype={{ item.fstype }}
+    opts=nodev
+    src={{ item.device }}
+    state=present
+  with_items: ansible_mounts
+- name: 1.1.14 - 1.1.16 Options for /dev/shm
+  mount: name=/dev/shm src=tmpfs fstype=tmpfs opts=nodev,nosuid,noexec state=present
+- name: 1.1.17 Sticky bit for world writable
+  file: path=/tmp mode=1777
+- name: 1.1.17 Sticky bit for world writable
+  shell: df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null | xargs chmod a+t
+  ignore_errors: True
+- name: 1.1.18 - 1.1.24 Enure selinux python installed
+  yum: name=libselinux-python state=present
+- name: 1.1.18 - 1.1.24 Disable Mounting of "other" Filesystems
+  copy : src=CIS.conf dest=/etc/modprobe.d/CIS.conf

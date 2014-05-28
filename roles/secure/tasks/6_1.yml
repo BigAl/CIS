@@ -1,0 +1,28 @@
+- name: 6.1.1 Enable anacron Daemon
+  yum: name=cronie-anacron state=present
+- name: 6.1.2 Enable cron Daemon
+  yum: name=cronie state=present
+- name: 6.1.2 Enable cron Daemon
+  service: name=crond state=started
+- name: 6.1.3 Set User/Group Owner and Permission on /etc/anacrontab
+  file: path=/etc/anacrontab owner=root group=root mode=0600
+- name: 6.1.4 Set User/Group Owner and Permission on /etc/crontab
+  file: path=/etc/crontab owner=root group=root mode=0600
+- name: 6.1.5 Set User/Group Owner and Permission on /etc/cron.hourly
+  file: path=/etc/cron.hourly owner=root group=root mode=0600
+- name: 6.1.6 Set User/Group Owner and Permission on /etc/cron.daily
+  file: path=/etc/cron.daily owner=root group=root mode=0600
+- name: 6.1.7 Set User/Group Owner and Permission on /etc/cron.weekly
+  file: path=/etc/cron.weekly owner=root group=root mode=0600
+- name: 6.1.8 Set User/Group Owner and Permission on /etc/cron.monthly
+  file: path=/etc/cron.monthly owner=root group=root mode=0600
+- name: 6.1.9 Set User/Group Owner and Permission on /etc/cron.d
+  file: path=/etc/cron.d owner=root group=root mode=0600
+- name: 6.1.10 Restrict at Daemon
+  copy: src=at.allow dest=/etc/at.allow owner=root group=root mode=0600
+- name: 6.1.10 Restrict at Daemon
+  file: path=/etc/at.deny state=absent
+- name: 6.1.11 Restrict at/cron to Authorized Users
+  copy: src=cron.allow dest=/etc/cron.allow owner=root group=root mode=0600
+- name: 6.1.11 Restrict at/cron to Authorized Users
+  file: path=/etc/cron.deny state=absent

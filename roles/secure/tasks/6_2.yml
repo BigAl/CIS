@@ -1,0 +1,41 @@
+- name: 6.2.1 Set SSH Protocol to 2 
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^Protocol line='Protocol 2'
+- name: 6.2.2 Set LogLevel to INFO
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^LogLevel line='LogLevel INFO'
+- name: 6.2.3 Set Permissions on /etc/ssh/sshd_config
+  file: path=/etc/ssh/sshd_config owner=root group=root mode=0600
+- name: 6.2.4 Disable SSH X11 Forwarding 
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^X11Forwarding line='X11Forwarding no'
+- name: 6.2.5 Set SSH MaxAuthTries to 4 or Less
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^MaxAuthTries line='MaxAuthTries 4'
+- name: 6.2.6 Set SSH IgnoreRhosts to Yes
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^IgnoreRhosts line='IgnoreRhosts yes'
+- name: 6.2.7 Set SSH HostbasedAuthentication to No
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^HostbasedAuthentication line='HostbasedAuthentication no'
+- name: 6.2.8 Disable SSH Root Login
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^PermitRootLogin line='PermitRootLogin no'
+- name: 6.2.9 Set SSH PermitEmptyPasswords to No
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^PermitEmptyPasswords line='PermitEmptyPasswords no'
+- name: 6.2.10 Do Not Allow Users to Set Environment Options
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^PermitUserEnvironment line='PermitUserEnvironment no'
+- name: 6.2.11 Use Only Approved Cipher in Counter Mode
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^Ciphers line='Ciphers aes128-ctr,aes192-ctr,aes256-ctr'
+- name: 6.2.12 Set Idle Timeout Interval for User Login
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^ClientAliveInterval line='ClientAliveInterval 300'
+- name: 6.2.12 Set Idle Timeout Interval for User Login
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^ClientAliveCountMax line='ClientAliveCountMax 0'
+- name: 6.2.13 Limit Access via SSH
+  lineinfile: dest=/etc/ssh/sshd_config regexp=DenyUsers line='DenyUsers bin' 
+- name: 6.2.14 Set SSH Banner
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^Banner line='Banner /etc/issue.net'
+- name: 6.2.14 Set SSH Banner (prevent duplicate of Banner with ssh)
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^PrintMotd line='PrintMotd no'
+- name: 6.3.1 Upgrade Password Hashing Algorithm to SHA-512
+  lineinfile: dest=/etc/sysconfig/authconfig regexp=^PASSWDALGORITHM line='PASSWDALGORITHM=sha512'
+  notify: update authconfig
+- name: 6.3.2 Set Password Creation Requirement Parameters Using pam_cracklib
+  lineinfile: dest=/etc/pam.d/system-auth regexp="^password required pam_cracklib.so" line='password required pam_cracklib.so try_first_pass retry=3 minlen=14 dcredit=-1 ucredit=-1 ocredit=-1 lcredit=-1'
+- name: 6.3.4 Limit Password Reuse 
+  lineinfile: dest=/etc/pam.d/system-auth regexp="^password sufficient pam_unix.so" line='password sufficient pam_unix.so remember=5'
+- name: 6.5 Restrict Access to the su Command
+  lineinfile: dest=/etc/pam.d/su regexp="^auth required pam_wheel.so" line='auth required pam_wheel.so use_uid'
