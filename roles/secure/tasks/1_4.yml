@@ -7,4 +7,8 @@
   yum: name=setroubleshoot state=absent
 - name: 1.4.5 Remove MCS Translation Service
   yum: name=mcstrans state=absent
+  when: ansible_os_family == 'RedHat' and ansible_distribution_version.split(".")[0]|int == 6
+- name: 1.4.5 Disable MCS Translation Service
+  service: name=mcstrans enabled=no state=stopped
+  when: ansible_os_family == 'RedHat' and ansible_distribution_version.split(".")[0]|int == 5
 #- name: 1.4.6 Check for unconfirmed Daemons

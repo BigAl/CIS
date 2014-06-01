@@ -1,7 +1,12 @@
+- name: 6.1.1 Enable anacron Daemon (Redhat 5)
+  yum: name=anacron state=present
+  when: ansible_os_family == 'RedHat' and ansible_distribution_version.split(".")[0]|int == 5
 - name: 6.1.1 Enable anacron Daemon
   yum: name=cronie-anacron state=present
+  when: ansible_os_family == 'RedHat' and ansible_distribution_version.split(".")[0]|int == 6
 - name: 6.1.2 Enable cron Daemon
   yum: name=cronie state=present
+  when: ansible_os_family == 'RedHat' and ansible_distribution_version.split(".")[0]|int == 6
 - name: 6.1.2 Enable cron Daemon
   service: name=crond state=started
 - name: 6.1.3 Set User/Group Owner and Permission on /etc/anacrontab

@@ -3,7 +3,7 @@
 - name: 3.2 Remove X Windows (runlevel 3)
   lineinfile: dest=/etc/inittab state=present regexp="^id:" line="id:3:initdefault:"
 - name: 3.2 Remove X Windows (remove package group)
-  yum: name="@X Window System" state=absent
+  yum: name="@X Windows System" state=absent
   ignore_errors: True
 - name: 3.4 Check if avahi is installed
   command: rpm -q avahi
@@ -29,3 +29,7 @@
   - restart ntp
 - name: 3.16 Configure Mail Transfer Agent for Local-Only Mode
   lineinfile: dest=/etc/postfix/main.cf state=present regexp="^inet_interfaces" line="inet_interfaces = localhost" insertafter=EOF
+  when: ansible_os_family == 'RedHat' and ansible_distribution_version.split(".")[0]|int == 6
+- name: 3.16 Configure Mail Transfer Agent for Local-Only Mode
+  lineinfile: dest=/etc/mail/sendmail.cf state=present regexp="^O DaemonPortOptions=" line="O DaemonPortOptions=Port=smtp,Addr=127.0.0.1, Name=MTA"
+  when: ansible_os_family == 'RedHat' and ansible_distribution_version.split(".")[0]|int == 5
