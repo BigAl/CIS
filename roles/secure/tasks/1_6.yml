@@ -1,5 +1,5 @@
 - name: 1.6.1  Restrict Core Dumps
-  lineinfile: dest=/etc/security/limits.conf regexp=^hard= line="* hard core 0"
+  lineinfile: dest=/etc/security/limits.conf regexp='^\* hard' line="* hard core 0"
 - name: 1.6.1  Restrict Core Dumps
   sysctl: name=fs.suid_dumpable value=0 state=present
 - name: 1.6.2 Configure ExecShield 

@@ -1,19 +1,19 @@
-- include: 1_1.yml
-- include: 1_3.yml
-- include: 1_4.yml
-- include: 1_5.yml
-- include: 1_6.yml
-- include: 2_1.yml
-- include: 3.yml
-- include: 4_1.yml
-- include: 4_2.yml
-- include: 4_4.yml
-- include: 4_5.yml
-- include: 4_7.yml
-- include: 5_1.yml
-- include: 5_2.yml
-- include: 6_1.yml
-- include: 6_2.yml
-- include: 7.yml
-- include: 8.yml
-- include: 9.yml
+- include: 1_1.yml tags=S1.1
+- include: 1_3.yml tags=S1.3
+- include: 1_4.yml tags=S1.4
+- include: 1_5.yml tags=S1.5
+- include: 1_6.yml tags=S1.6
+- include: 2_1.yml tags=S2.1
+- include: 3.yml tags=S3
+- include: 4_1.yml tags=S4.1
+- include: 4_2.yml tags=S4.2
+- include: 4_4.yml tags=S4.4
+- include: 4_5.yml tags=S4.5
+- include: 4_7.yml tags=S4.7
+- include: 5_1.yml tags=S5.1
+- include: 5_2.yml tags=S5.2
+- include: 6_1.yml tags=S6.1
+- include: 6_2.yml tags=S6.2
+- include: 7.yml tags=S7
+- include: 8.yml tags=S8
+- include: 9.yml tags=S9
