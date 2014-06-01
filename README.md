@@ -13,8 +13,8 @@ The playbook will configure your system to meet the requirements of the scored C
 
 Usage
 --
-git clone git://github.com/AlanC-au/CIS
-cd  CIS
+    git clone git://github.com/AlanC-au/CIS
+    cd  CIS
 
 Perform a dry run:
 
